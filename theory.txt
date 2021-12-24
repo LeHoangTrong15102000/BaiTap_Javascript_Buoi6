@@ -1,0 +1,11 @@
+// khi DOM đến thẻ Select mà không có value thì nó sẽ lấy giá trị của innerHTML của option được chọn
+// Còn nếu có giá trị value thì phải lấy giá trị valua của nó
+
+
+// Để mà lấy được innerHTML và cả value luôn thì làm sao
+
+const arrTagOption = selectChucVu.options;
+
+// Select sẽ cho phép lấy ra cái index của option được chọn bởi thuộc tính
+
+// Cái nào khai báo quá nhiều biến thì mình sẽ xây dựng đối tượng
