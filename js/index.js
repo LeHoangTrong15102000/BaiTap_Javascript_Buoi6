@@ -2,6 +2,7 @@
 
 // Đối tượng là nhân viên
 const nhanVien = {
+  // **************** Props
   maNhanVien: '',
   tenNhanVien: '',
   heSoChucVu: '',
@@ -9,11 +10,35 @@ const nhanVien = {
   luongCoBan: '',
   soGioLam: '',
 
+  // ******************* Methods
   // Xây dựng hàm tính lương nhân viện dựa trên số giờ làm và hệ số chức vụ
-  tinhTongLuong() {},
+  tinhTongLuong() {
+    let tongLuong = 0;
+
+    if (this.chucVu === 'Giám đốc') {
+      tongLuong = this.luongCoBan * this.heSoChucVu;
+    } else if (this.chucVu === 'Quản lý') {
+      tongLuong = this.luongCoBan * this.heSoChucVu;
+    } else if (this.chucVu === 'Nhân viên') {
+      tongLuong = this.luongCoBan * this.heSoChucVu;
+    }
+    return tongLuong;
+  },
 
   // Xây dựng hàm xếp loại nhân viên trong một tháng dựa trên số giờ làm trong tháng.
-  xepLoaiNV() {},
+  xepLoaiNV() {
+    let ketQuaXepLoai = '';
+
+    if (this.soGioLam > 50 && this.soGioLam <= 80) {
+      ketQuaXepLoai = 'Trung bình';
+    } else if (this.soGioLam > 80 && this.soGioLam <= 100) {
+      ketQuaXepLoai = 'Khá';
+    } else if (this.soGiolam > 100 && this.soGioLam <= 120) {
+      ketQuaXepLoai = 'Giỏi';
+    } else ketQuaXepLoai = 'Xuất sắc';
+
+    return ketQuaXepLoai;
+  },
 };
 
 // Xây dựng nút button
@@ -22,8 +47,10 @@ document.querySelector('#btnXacNhan').onclick = () => {
   nhanVien.maNhanVien = document.querySelector('#maNhanVien').value;
   nhanVien.tenNhanVien = document.querySelector('#tenNhanVien').value;
   nhanVien.heSoChucVu = document.querySelector('#chucVu').value;
-  nhanVien.luongCoBan = document.querySelector('#luongCoBan').value;
+  nhanVien.luongCoBan = Number(document.querySelector('#luongCoBan').value);
   nhanVien.soGioLam = document.querySelector('#soGioLamTrongThang').value;
+
+  // console.log(nhanVien.heSoChucVu);
 
   // Lấy ra mảng các thẻ option
 
@@ -38,4 +65,16 @@ document.querySelector('#btnXacNhan').onclick = () => {
   nhanVien.chucVu = arrTagOption[indexOptionSelected].innerHTML;
 
   // console.log('arrTagOption', arrTagOption);
+
+  document.querySelector('#text-tenNhanVien').textContent =
+    nhanVien.tenNhanVien;
+  document.querySelector('#text-maNhanVien').textContent = nhanVien.maNhanVien;
+  document.querySelector('#text-chucVu').textContent = nhanVien.chucVu;
+
+  const tongLuong = nhanVien.tinhTongLuong();
+  const xepLoaiNhanVien = nhanVien.xepLoaiNV();
+
+  document.querySelector('#text-tongLuong').textContent = tongLuong;
+  document.querySelector('#text-xepLoaiTrongThang').textContent =
+    xepLoaiNhanVien;
 };
