@@ -29,6 +29,10 @@ const nhanVien = {
   xepLoaiNV() {
     let ketQuaXepLoai = '';
 
+    // Nếu chưa điền số giờ làm thì bắt phải điền giờ làm vào
+    if (this.soGioLam === '') return 'Yêu cầu điền số giờ làm trong tháng';
+
+    // Đánh giá nhân viên dựa trên số giờ làm việc trong tháng
     if (this.soGioLam > 50 && this.soGioLam <= 80) {
       ketQuaXepLoai = 'Trung bình';
     } else if (this.soGioLam > 80 && this.soGioLam <= 100) {
